@@ -6,12 +6,11 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.json());
-
+const ex = 2;
 const PORT = process.env.PORT || 4000;
 const DB_PATH = path.join(__dirname, 'secrets-db.json');
 const API_KEY = process.env.VAULT_API_KEY;
 
-// --- Middleware for API Key Authentication ---
 const apiKeyAuth = (req, res, next) => {
     const providedKey = req.headers['x-api-key'];
     if (!API_KEY || providedKey !== API_KEY) {
@@ -20,19 +19,16 @@ const apiKeyAuth = (req, res, next) => {
     next();
 };
 
-// --- Helper function to read the database ---
 const readDb = async () => {
     try {
         await fs.access(DB_PATH);
         const data = await fs.readFile(DB_PATH, 'utf8');
         return JSON.parse(data);
     } catch (error) {
-        // If the file doesn't exist, return an empty object
         return {};
     }
 };
 
-// --- API Endpoint to Create a Secret ---
 app.post('/secrets', apiKeyAuth, async (req, res) => {
     const secretData = req.body;
     if (!secretData || !secretData.Secret) {
@@ -48,7 +44,6 @@ app.post('/secrets', apiKeyAuth, async (req, res) => {
     res.status(201).json({ message: 'Secret stored', id });
 });
 
-// --- API Endpoint to Get a Secret by ID ---
 app.get('/secrets/:id', apiKeyAuth, async (req, res) => {
     const db = await readDb();
     const secret = db[req.params.id];
