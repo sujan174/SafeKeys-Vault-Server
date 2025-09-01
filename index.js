@@ -79,11 +79,13 @@ const apiKeyAuth = (req, res, next) => {
 
 
 app.get('/secrets', apiKeyAuth, async (req, res) => {
+    console.log('[Vault Server] Fetching all secrets');
     const db = await readDb();
     res.status(200).json(db);
 });
 
 app.post('/secrets', apiKeyAuth, async (req, res) => {
+    console.log('[Vault Server] Storing a new secret');
     const secretData = req.body;
     if (!secretData || !secretData.Secret) {
         return res.status(400).json({ error: 'Invalid secret data provided' });
@@ -99,6 +101,7 @@ app.post('/secrets', apiKeyAuth, async (req, res) => {
 });
 
 app.get('/secrets/:id', apiKeyAuth, async (req, res) => {
+    console.log(`[Vault Server] Fetching secret ${req.params.id}`);
     const db = await readDb();
     const secret = db[req.params.id];
 
