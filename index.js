@@ -3,8 +3,11 @@ const fs = require('fs-extra');
 const path = require('path');
 const crypto = require('crypto');
 require('dotenv').config();
+const cors = require('cors'); 
+
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 8000;
