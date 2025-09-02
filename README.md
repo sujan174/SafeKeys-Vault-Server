@@ -4,7 +4,6 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)  
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)  
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)  
 ![AES](https://img.shields.io/badge/AES_256-FF6B6B?style=for-the-badge&logo=lock&logoColor=white)  
 
 This server provides a simple API to store and retrieve secrets found in your codebases.
